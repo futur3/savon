@@ -5,6 +5,7 @@ class Savon
 
     def initialize
       @client = ::HTTPClient.new
+      @client.ssl_config.verify_mode = OpenSSL::SSL::VERIFY_NONE
     end
 
     # Public: Returns the HTTPClient instance to configure.
