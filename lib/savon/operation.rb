@@ -23,6 +23,8 @@ class Savon
       @encoding = ENCODING
     end
 
+    attr_accessor :raw_xml_message
+
     # Public: Accessor for the SOAP endpoint.
     attr_accessor :endpoint
 
@@ -77,7 +79,8 @@ class Savon
 
     # Public: Call the operation.
     def call
-      raw_response = @http.post(endpoint, http_headers, build)
+      message = (raw_xml_message != nil ? raw_xml_message : build)
+      raw_response = @http.post(endpoint, http_headers, message)
       Response.new(raw_response)
     end
 
